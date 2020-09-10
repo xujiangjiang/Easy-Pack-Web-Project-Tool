@@ -27,6 +27,8 @@ This tool has the following functions:
 <br/>
 
 - Remove the commented-out code in the .html file
+- And export the files (image files, font files, etc.) in .html to the corresponding folder, and automatically modify the path in the .html file
+- And you can automatically change the file in .html to a string in base64 format
 
 <br/>
 
@@ -36,7 +38,7 @@ This tool has the following functions:
 
 ## Download
 
-Click here to download：https://github.com/xujiangjiang/Easy-Pack-Web-Project-Tool/releases/download/v1.0.0/EasyPackWebProjectTool.v1.0.0.zip
+Click here to download：https://github.com/xujiangjiang/Easy-Pack-Web-Project-Tool/releases/download/v2.0.0/EasyPackWebProjectTool.v2.0.0.zip
 
 <br/>
 
@@ -99,12 +101,18 @@ Then, we have to set it like this in this configuration file:
         //Where should I save the packaged .html file? (Relative path, relative to the path of this configuration file)
         "outputPath":"./dist/index.html",
         //Do you want to remove the commented-out code in the .html file?
-        "isDeleteCommentedOutCode":true
+        "isDeleteCommentedOutCode":true,
+        //Do you want to export image files (and other files)?
+        "isOutputOtherFile":true,
+        //The export location of the image files (and other files) (Note: this is a folder, it must be a relative path, which is relative to the Css.OutputPath property)
+        "otherFileOutputPath":"./img/",
+        //Do you want to automatically convert the file to a base64 string?
+        "isOtherFileConvertBase64":true,
+        //When the file is smaller than how much, convert this file to base64 string? (Unit: B)
+        "base64ConvertLimit":10240
     },
 
 }
-
-
 ```
 
 <br/>

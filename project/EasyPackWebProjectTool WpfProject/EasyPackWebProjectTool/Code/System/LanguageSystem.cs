@@ -38,6 +38,10 @@ namespace EasyPackWebProjectTool
         public string htmlFilePathTitleInPackUi = "将下列html文件进行打包：";
         public string htmlOutputPathTitleInPackUi = "要把打包后的.html文件,保存到哪里？";
         public string htmlIsDeleteCommentedOutCodeTitleInPackUi = "是否去掉注释？";
+        public string htmlIsOutputOtherFileTitleInPackUi = "是否导出图片（和其他文件）？";
+        public string htmlOtherFileOutputPathTitleInPackUi = "图片（和其他文件）的导出位置：";
+        public string htmlIsOtherFileConvertBase64TitleInPackUi = "是否要把文件自动转换为base64字符串？";
+        public string htmlBase64ConvertLimitTitleInPackUi = "文件小于多少，就转换为base64字符串？";
 
         //等待界面
         public string waitInWaitUi = "打包中...";
@@ -84,6 +88,10 @@ namespace EasyPackWebProjectTool
                 htmlFilePathTitleInPackUi = "将下列html文件进行打包：";
                 htmlOutputPathTitleInPackUi = "要把打包后的.html文件,保存到哪里？";
                 htmlIsDeleteCommentedOutCodeTitleInPackUi = "是否去掉注释？";
+                htmlIsOutputOtherFileTitleInPackUi = "是否导出图片（和其他文件）？";
+                htmlOtherFileOutputPathTitleInPackUi = "图片（和其他文件）的导出位置：";
+                htmlIsOtherFileConvertBase64TitleInPackUi = "是否要把文件自动转换为base64字符串？";
+                htmlBase64ConvertLimitTitleInPackUi = "文件小于多少，就转换为base64字符串？";
 
                 waitInWaitUi = "打包中...";
             }
@@ -111,13 +119,17 @@ namespace EasyPackWebProjectTool
                 cssIsDeleteCommentedOutCodeTitleInPackUi = "Do you remove the commented-out code?";
                 cssIsOutputOtherFileTitleInPackUi = "Do you want to export image files (and other files)?";
                 cssOtherFileOutputPathTitleInPackUi = "Where to export image files (and other files):";
-                cssIsOtherFileConvertBase64TitleInPackUi = "Do you want to automatically convert the file to base64 string?";
-                cssBase64ConvertLimitTitleInPackUi = "When the file is smaller than how much, convert the file to base64 string?";
+                cssIsOtherFileConvertBase64TitleInPackUi = "Do you want to automatically convert files to base64 string?";
+                cssBase64ConvertLimitTitleInPackUi = "When a file is smaller than how much, convert the file to base64?";
 
                 htmlTitleInPackUi = "Html File";
                 htmlFilePathTitleInPackUi = "Package the following html files:";
                 htmlOutputPathTitleInPackUi = "Where should I save the packaged .html file?";
                 htmlIsDeleteCommentedOutCodeTitleInPackUi = "Do you remove the commented-out code?";
+                htmlIsOutputOtherFileTitleInPackUi = "Do you want to export image files (and other files)?";
+                htmlOtherFileOutputPathTitleInPackUi = "Where to export image files (and other files):";
+                htmlIsOtherFileConvertBase64TitleInPackUi = "Do you want to automatically convert files to base64 string?";
+                htmlBase64ConvertLimitTitleInPackUi = "When a file is smaller than how much, convert the file to base64?";
 
                 waitInWaitUi = "Packing...";
             }

@@ -135,6 +135,14 @@ namespace EasyPackWebProjectTool
             _packUiControl.HtmlOutputPathInfoControl.Content = _configData.html.outputPath;
             _packUiControl.HtmlIsDeleteCommentedOutCodeInfoControl.Title = _languageSystem.htmlIsDeleteCommentedOutCodeTitleInPackUi;
             _packUiControl.HtmlIsDeleteCommentedOutCodeInfoControl.Content = _configData.html.isDeleteCommentedOutCode + "";
+            _packUiControl.HtmlIsOutputOtherFileInfoControl.Title = _languageSystem.htmlIsOutputOtherFileTitleInPackUi;
+            _packUiControl.HtmlIsOutputOtherFileInfoControl.Content = _configData.html.isOutputOtherFile + "";
+            _packUiControl.HtmlOtherFileOutputPathInfoControl.Title = _languageSystem.htmlOtherFileOutputPathTitleInPackUi;
+            _packUiControl.HtmlOtherFileOutputPathInfoControl.Content = _configData.html.otherFileOutputPath;
+            _packUiControl.HtmlIsOtherFileConvertBase64InfoControl.Title = _languageSystem.htmlIsOtherFileConvertBase64TitleInPackUi;
+            _packUiControl.HtmlIsOtherFileConvertBase64InfoControl.Content = _configData.html.isOtherFileConvertBase64 + "";
+            _packUiControl.HtmlBase64ConvertLimitInfoControl.Title = _languageSystem.htmlBase64ConvertLimitTitleInPackUi;
+            _packUiControl.HtmlBase64ConvertLimitInfoControl.Content = _configData.html.base64ConvertLimit + " B";
         }
         #endregion
 

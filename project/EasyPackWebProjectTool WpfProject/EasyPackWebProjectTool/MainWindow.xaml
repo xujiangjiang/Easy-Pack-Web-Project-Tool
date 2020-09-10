@@ -11,9 +11,9 @@
         xmlns:local="clr-namespace:EasyPackWebProjectTool"
         mc:Ignorable="d"
                             
-        Title="Easy bale web project tool v1.0   - [XuDaWang]" 
+        Title="Easy bale web project tool v2.0   - [XuDaWang]" 
         ResizeMode="CanMinimize"
-        Height="820" Width="520"
+        Height="820" Width="540"
         
         FontFamily="{StaticResource Zcool.FontFamily}"
         FontSize="14"
@@ -23,7 +23,7 @@
 
         <!--界面：打包-->
         <local:PackUiControl x:Name="PackUiControl"
-                             Width="500" Height="770" Margin="0,20,0,0" VerticalAlignment="Top"
+                             Width="520" Height="770" Margin="0,20,0,0" VerticalAlignment="Top"
                              ClickChooseFileButton="PackUiControl_ClickChooseFileButton"
                              ClickOkButton="PackUiControl_ClickOkButton"
                              ClickIntroductionButton="PackUiControl_ClickIntroductionButton"></local:PackUiControl>
@@ -36,7 +36,7 @@
 
         <!--界面：等待-->
         <local:WaitUiControl x:Name="WaitUiControl"
-                             VerticalAlignment="Top" Width="520" Height="820"
+                             VerticalAlignment="Top" Width="540" Height="820"
                              Visibility="Collapsed"></local:WaitUiControl>
         
     </Grid>

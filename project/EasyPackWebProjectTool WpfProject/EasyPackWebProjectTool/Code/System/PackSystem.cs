@@ -282,7 +282,7 @@ namespace EasyPackWebProjectTool.Code.System
                 //读取.html文件的内容
                 string _htmlContent = File.ReadAllText(_htmlFilePath);
 
-                //如果要去掉注释
+                /* 如果要去掉注释 */
                 if (_configData.html.isDeleteCommentedOutCode == true)
                 {
                     //正则表达式 (匹配所有//和/**/的注释)
@@ -291,6 +291,251 @@ namespace EasyPackWebProjectTool.Code.System
                     //去掉换行
                     _htmlContent = Regex.Replace(_htmlContent, @"^\s*\n", "", RegexOptions.Multiline);
                 }
+
+
+
+                /* 如果要导出文件 */
+                if (_configData.html.isOutputOtherFile == true)
+                {
+                    //文件输出的路径
+                    string _otherFileOutputPath = Path.Combine(Path.GetDirectoryName(_configData.configFilePath) + "/" + Path.GetDirectoryName(_configData.html.outputPath) + "/" + _configData.html.otherFileOutputPath);
+
+                    //获取html文件中，所有的图片路径
+                    MatchCollection _linkMatchConllection = Regex.Matches(_htmlContent, @"<link.*>", RegexOptions.Multiline);//link标签
+                    MatchCollection _imgMatchConllection = Regex.Matches(_htmlContent, @"<img.*>", RegexOptions.Multiline);//img标签
+                    MatchCollection _audioMatchConllection = Regex.Matches(_htmlContent, @"<audio.*>", RegexOptions.Multiline);//audio标签
+                    MatchCollection _videoMatchConllection = Regex.Matches(_htmlContent, @"<video.*>", RegexOptions.Multiline);//video标签
+
+                    //遍历所有的<link>标签中的图片路径
+                    for (int i = 0; i < _linkMatchConllection.Count; i++)
+                    {
+                        //获取这个图片的路径(去掉前面的href=" 和后面的 ")
+                        string _urlPath = _linkMatchConllection[i].Value;
+                        _urlPath = Regex.Match(_urlPath, "href=\"\\S*\"", RegexOptions.Multiline).Value;
+                        _urlPath = Regex.Replace(_urlPath, "^href=\"", "", RegexOptions.Multiline);
+                        _urlPath = Regex.Replace(_urlPath, "\"$", "", RegexOptions.Multiline);
+
+                        //图片文件的完整路径
+                        string _filePath = Path.Combine(Path.GetDirectoryName(_htmlFilePath) + "/" + _urlPath);
+
+                        //图片文件的信息
+                        FileInfo _fileInfo = new FileInfo(_filePath);
+
+                        //如果有文件
+                        if (_fileInfo.Exists == true)
+                        {
+                            //如果文件的后缀名是.png、.jpg、.ico、.gif、.jpeg
+                            if (_fileInfo.Extension == ".png" || _fileInfo.Extension == ".jpg" || _fileInfo.Extension == ".ico" || _fileInfo.Extension == ".gif" || _fileInfo.Extension == ".jpeg")
+                            {
+                                //如果要转换为base64，并且大小小于我们的限制
+                                if (_configData.html.isOtherFileConvertBase64 == true && _fileInfo.Length <= _configData.html.base64ConvertLimit)
+                                {
+                                    //读取这个图片
+                                    byte[] _fileByte = File.ReadAllBytes(_filePath);
+
+                                    //把这个图片，转换成base64
+                                    string _fileBase64 = Convert.ToBase64String(_fileByte, Base64FormattingOptions.None);
+
+                                    //获取这个图片的Mime类型
+                                    string _fileMimeType = "data:" + AppManager.Systems.MimeSystem.GetFileMimeType(_fileInfo.Extension) + ";base64,";
+
+                                    //修改html文件的中的图片路径
+                                    _htmlContent = _htmlContent.Replace(_linkMatchConllection[i].Value, Regex.Replace(_linkMatchConllection[i].Value, "href=\"\\S*\"", "href=\"" + _fileMimeType + _fileBase64 + "\"", RegexOptions.Multiline));
+                                }
+
+                                //如果不转换
+                                else
+                                {
+                                    //如果图片的导出文件夹不存在，就创建
+                                    if (Directory.Exists(_otherFileOutputPath) == false)
+                                    {
+                                        Directory.CreateDirectory(_otherFileOutputPath);
+                                    }
+
+                                    //复制这个图片
+                                    File.Copy(_filePath, _otherFileOutputPath + Path.GetFileName(_filePath), true);
+
+                                    //修改html文件的中的图片路径(导出的路径+图片的名字)
+                                    _htmlContent = _htmlContent.Replace(_linkMatchConllection[i].Value, Regex.Replace(_linkMatchConllection[i].Value, "href=\"\\S*\"", "href=\"" + _configData.css.otherFileOutputPath + Path.GetFileName(_urlPath) + "\"", RegexOptions.Multiline));
+                                }
+                            }
+
+                        }
+                    }
+
+                    //遍历所有的<img>标签中的图片路径
+                    for (int i = 0; i < _imgMatchConllection.Count; i++)
+                    {
+                        //获取这个图片的路径(去掉前面的src=" 和后面的 ")
+                        string _urlPath = _imgMatchConllection[i].Value;
+                        _urlPath = Regex.Match(_urlPath, "src=\"\\S*\"", RegexOptions.Multiline).Value;
+                        _urlPath = Regex.Replace(_urlPath, "^src=\"", "", RegexOptions.Multiline);
+                        _urlPath = Regex.Replace(_urlPath, "\"$", "", RegexOptions.Multiline);
+
+                        //图片文件的完整路径
+                        string _filePath = Path.Combine(Path.GetDirectoryName(_htmlFilePath) + "/" + _urlPath);
+
+                        //图片文件的信息
+                        FileInfo _fileInfo = new FileInfo(_filePath);
+
+                        //如果有文件
+                        if (_fileInfo.Exists == true)
+                        {
+                            //如果文件的后缀名是.png、.jpg、.ico、.svg、.gif、.jpeg
+                            if (_fileInfo.Extension == ".png" || _fileInfo.Extension == ".jpg" || _fileInfo.Extension == ".jpeg" 
+                                || _fileInfo.Extension == ".ico" || _fileInfo.Extension == ".gif" || _fileInfo.Extension == ".svg")
+                            {
+                                //如果要转换为base64，并且大小小于我们的限制
+                                if (_configData.html.isOtherFileConvertBase64 == true && _fileInfo.Length <= _configData.html.base64ConvertLimit)
+                                {
+                                    //读取这个图片
+                                    byte[] _fileByte = File.ReadAllBytes(_filePath);
+
+                                    //把这个图片，转换成base64
+                                    string _fileBase64 = Convert.ToBase64String(_fileByte, Base64FormattingOptions.None);
+
+                                    //获取这个图片的Mime类型
+                                    string _fileMimeType = "data:" + AppManager.Systems.MimeSystem.GetFileMimeType(_fileInfo.Extension) + ";base64,";
+
+                                    //修改html文件的中的图片路径
+                                    _htmlContent = _htmlContent.Replace(_imgMatchConllection[i].Value, Regex.Replace(_imgMatchConllection[i].Value, "src=\"\\S*\"", "src=\"" + _fileMimeType + _fileBase64 + "\"", RegexOptions.Multiline));
+                                }
+
+                                //如果不转换
+                                else
+                                {
+                                    //如果图片的导出文件夹不存在，就创建
+                                    if (Directory.Exists(_otherFileOutputPath) == false)
+                                    {
+                                        Directory.CreateDirectory(_otherFileOutputPath);
+                                    }
+
+                                    //复制这个图片
+                                    File.Copy(_filePath, _otherFileOutputPath + Path.GetFileName(_filePath), true);
+
+                                    //修改html文件的中的图片路径(导出的路径+图片的名字)
+                                    _htmlContent = _htmlContent.Replace(_imgMatchConllection[i].Value, Regex.Replace(_imgMatchConllection[i].Value, "src=\"\\S*\"", "src=\"" + _configData.css.otherFileOutputPath + Path.GetFileName(_urlPath) + "\"", RegexOptions.Multiline));
+                                }
+                            }
+
+                        }
+                    }
+
+                    //遍历所有的<audio>标签中的图片路径
+                    for (int i = 0; i < _audioMatchConllection.Count; i++)
+                    {
+                        //获取这个图片的路径(去掉前面的src=" 和后面的 ")
+                        string _urlPath = _audioMatchConllection[i].Value;
+                        _urlPath = Regex.Match(_urlPath, "src=\"\\S*\"", RegexOptions.Multiline).Value;
+                        _urlPath = Regex.Replace(_urlPath, "^src=\"", "", RegexOptions.Multiline);
+                        _urlPath = Regex.Replace(_urlPath, "\"$", "", RegexOptions.Multiline);
+
+                        //图片文件的完整路径
+                        string _filePath = Path.Combine(Path.GetDirectoryName(_htmlFilePath) + "/" + _urlPath);
+
+                        //图片文件的信息
+                        FileInfo _fileInfo = new FileInfo(_filePath);
+
+                        //如果有文件
+                        if (_fileInfo.Exists == true)
+                        {
+                            //如果文件的后缀名是.wav、.mp3、.ogg
+                            if (_fileInfo.Extension == ".wav" || _fileInfo.Extension == ".mp3" || _fileInfo.Extension == ".ogg")
+                            {
+                                //如果要转换为base64，并且大小小于我们的限制
+                                if (_configData.html.isOtherFileConvertBase64 == true && _fileInfo.Length <= _configData.html.base64ConvertLimit)
+                                {
+                                    //读取这个图片
+                                    byte[] _fileByte = File.ReadAllBytes(_filePath);
+
+                                    //把这个图片，转换成base64
+                                    string _fileBase64 = Convert.ToBase64String(_fileByte, Base64FormattingOptions.None);
+
+                                    //获取这个图片的Mime类型
+                                    string _fileMimeType = "data:" + AppManager.Systems.MimeSystem.GetFileMimeType(_fileInfo.Extension,FileType.Audio) + ";base64,";
+
+                                    //修改html文件的中的图片路径
+                                    _htmlContent = _htmlContent.Replace(_audioMatchConllection[i].Value, Regex.Replace(_audioMatchConllection[i].Value, "src=\"\\S*\"", "src=\"" + _fileMimeType + _fileBase64 + "\"", RegexOptions.Multiline));
+                                }
+
+                                //如果不转换
+                                else
+                                {
+                                    //如果图片的导出文件夹不存在，就创建
+                                    if (Directory.Exists(_otherFileOutputPath) == false)
+                                    {
+                                        Directory.CreateDirectory(_otherFileOutputPath);
+                                    }
+
+                                    //复制这个图片
+                                    File.Copy(_filePath, _otherFileOutputPath + Path.GetFileName(_filePath), true);
+
+                                    //修改html文件的中的图片路径(导出的路径+图片的名字)
+                                    _htmlContent = _htmlContent.Replace(_audioMatchConllection[i].Value, Regex.Replace(_audioMatchConllection[i].Value, "src=\"\\S*\"", "src=\"" + _configData.css.otherFileOutputPath + Path.GetFileName(_urlPath) + "\"", RegexOptions.Multiline));
+                                }
+                            }
+
+                        }
+                    }
+
+                    //遍历所有的<audio>标签中的图片路径
+                    for (int i = 0; i < _videoMatchConllection.Count; i++)
+                    {
+                        //获取这个图片的路径(去掉前面的src=" 和后面的 ")
+                        string _urlPath = _videoMatchConllection[i].Value;
+                        _urlPath = Regex.Match(_urlPath, "src=\"\\S*\"", RegexOptions.Multiline).Value;
+                        _urlPath = Regex.Replace(_urlPath, "^src=\"", "", RegexOptions.Multiline);
+                        _urlPath = Regex.Replace(_urlPath, "\"$", "", RegexOptions.Multiline);
+
+                        //图片文件的完整路径
+                        string _filePath = Path.Combine(Path.GetDirectoryName(_htmlFilePath) + "/" + _urlPath);
+
+                        //图片文件的信息
+                        FileInfo _fileInfo = new FileInfo(_filePath);
+
+                        //如果有文件
+                        if (_fileInfo.Exists == true)
+                        {
+                            //如果文件的后缀名是.mp4、.WebM、.Ogg
+                            if (_fileInfo.Extension == ".mp4" || _fileInfo.Extension == ".webm" || _fileInfo.Extension == ".ogg")
+                            {
+                                //如果要转换为base64，并且大小小于我们的限制
+                                if (_configData.html.isOtherFileConvertBase64 == true && _fileInfo.Length <= _configData.html.base64ConvertLimit)
+                                {
+                                    //读取这个图片
+                                    byte[] _fileByte = File.ReadAllBytes(_filePath);
+
+                                    //把这个图片，转换成base64
+                                    string _fileBase64 = Convert.ToBase64String(_fileByte, Base64FormattingOptions.None);
+
+                                    //获取这个图片的Mime类型
+                                    string _fileMimeType = "data:" + AppManager.Systems.MimeSystem.GetFileMimeType(_fileInfo.Extension,FileType.Video) + ";base64,";
+
+                                    //修改html文件的中的图片路径
+                                    _htmlContent = _htmlContent.Replace(_videoMatchConllection[i].Value, Regex.Replace(_videoMatchConllection[i].Value, "src=\"\\S*\"", "src=\"" + _fileMimeType + _fileBase64 + "\"", RegexOptions.Multiline));
+                                }
+
+                                //如果不转换
+                                else
+                                {
+                                    //如果图片的导出文件夹不存在，就创建
+                                    if (Directory.Exists(_otherFileOutputPath) == false)
+                                    {
+                                        Directory.CreateDirectory(_otherFileOutputPath);
+                                    }
+
+                                    //复制这个图片
+                                    File.Copy(_filePath, _otherFileOutputPath + Path.GetFileName(_filePath), true);
+
+                                    //修改html文件的中的图片路径(导出的路径+图片的名字)
+                                    _htmlContent = _htmlContent.Replace(_videoMatchConllection[i].Value, Regex.Replace(_videoMatchConllection[i].Value, "src=\"\\S*\"", "src=\"" + _configData.css.otherFileOutputPath + Path.GetFileName(_urlPath) + "\"", RegexOptions.Multiline));
+                                }
+                            }
+
+                        }
+                    }
+                }
+
 
 
                 /* 输出文件 */

@@ -31,7 +31,7 @@
                     <Button Name="ChooseConfigButton" Content="选择配置文件" Click="ChooseFileButton_OnClick"></Button>
                     <TextBox Name="FilePathTextBox"
                              Text="" Margin="10,5,10,5" Foreground="Gray"
-                             MaxHeight="40" MaxWidth="280" BorderThickness="0" BorderBrush="Transparent" Background="Transparent"
+                             MaxHeight="40" MaxWidth="300" BorderThickness="0" BorderBrush="Transparent" Background="Transparent"
                              Padding="0" VerticalScrollBarVisibility="Auto" IsReadOnly="True"
                              TextWrapping="Wrap"></TextBox>
                 </StackPanel>
@@ -155,6 +155,30 @@
                                                    Margin="20,10" 
                                                    Title="是否去掉注释？"
                                                    Content="是"></local:InfoControl>
+
+                                <!--是否导出图片（和其他文件）？-->
+                                <local:InfoControl x:Name="HtmlIsOutputOtherFileInfoControl"
+                                                   Margin="20,10" 
+                                                   Title="是否导出图片（和其他文件）？"
+                                                   Content="是"></local:InfoControl>
+
+                                <!--图片（和其他文件）的导出位置-->
+                                <local:InfoControl x:Name="HtmlOtherFileOutputPathInfoControl"
+                                                   Margin="20,10" 
+                                                   Title="图片（和其他文件）的导出位置："
+                                                   Content="xxx/xxxx/xx/"></local:InfoControl>
+
+                                <!--是否要把文件自动转换为base64字符串？-->
+                                <local:InfoControl x:Name="HtmlIsOtherFileConvertBase64InfoControl"
+                                                   Margin="20,10" 
+                                                   Title="是否要把文件自动转换为base64字符串？"
+                                                   Content="是"></local:InfoControl>
+
+                                <!--文件小于多少B，就转换为base64字符串？-->
+                                <local:InfoControl x:Name="HtmlBase64ConvertLimitInfoControl"
+                                                   Margin="20,10" 
+                                                   Title="文件小于多少，就转换为base64字符串？"
+                                                   Content="10240 B"></local:InfoControl>
 
                             </StackPanel>
 

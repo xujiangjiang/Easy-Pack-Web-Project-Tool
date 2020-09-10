@@ -25,6 +25,8 @@
 <br/>
 
 - 可以去除.html文件中的注释
+- 并且把.html中的文件（图片、字体等），导出到对应的文件夹，并且自动修改.html文件中的路径
+- 并且可以把.html中的文件，自动改为base64格式的字符串
 
 <br/>
 
@@ -87,12 +89,18 @@
         //要把打包后的.html文件，保存到哪里？（相对路径，相对于这个配置文件的路径）
         "outputPath":"./dist/index.html",
         //是否要去掉.html文件中的注释？
-        "isDeleteCommentedOutCode":true
+        "isDeleteCommentedOutCode":true,
+        //是否导出图片（和其他文件）？
+        "isOutputOtherFile":true,
+        //图片（和其他文件）的导出位置（注意：这是一个文件夹，必须是相对路径，是相对于Css.OutputPath属性的路径）
+        "otherFileOutputPath":"./img/",
+        //是否要把文件自动转换为base64字符串？
+        "isOtherFileConvertBase64":true,
+        //文件小于多少时，就转换为base64字符串？（单位：B）
+        "base64ConvertLimit":10240
     },
 
 }
-
-
 ```
 
 <br/>

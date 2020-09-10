@@ -1,5 +1,5 @@
 {
-	"js":{
+    "js":{
         "filePaths":["./js/other/ui/otherUi.js",
                     "./js/other/otherApp.js",
                     "./js/timer/other/enums.js",
@@ -25,7 +25,11 @@
     "html":{
         "filePath":"./index.html",
         "isDeleteCommentedOutCode":true,
-        "outputPath":"./dist/index.html"
+        "outputPath":"./dist/index.html",
+        "isOutputOtherFile":true,
+        "otherFileOutputPath":"./img/",
+        "isOtherFileConvertBase64":true,
+        "base64ConvertLimit":10240
     }
 }
 
