@@ -4,7 +4,7 @@
 
 这个工具用于把Web项目（Html文件、Css文件、Js文件），进行打包。
 
-![image1](image/image1.png)
+![image1](asset/image1.png)
 
 <br/>
 
@@ -105,7 +105,7 @@
 
 然后，点击开始打包按钮，就可以啦！
 
-![image1](image/image2.png)
+![image1](asset/image2.png)
 
 
 
