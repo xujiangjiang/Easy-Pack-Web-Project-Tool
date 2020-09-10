@@ -1,0 +1,23 @@
+[
+    {"ExtensionName":".html","MimeType":"text/html"},
+    {"ExtensionName":".js","MimeType":"application/javascript"},
+    {"ExtensionName":".css","MimeType":"text/css"},
+    {"ExtensionName":".json","MimeType":"application/json"},
+    {"ExtensionName":".txt","MimeType":"text/plain"},
+    {"ExtensionName":".rtf","MimeType":"application/rtf"},
+    {"ExtensionName":".gif","MimeType":"image/gif"},
+    {"ExtensionName":".jpeg","MimeType":"image/jpeg"},
+    {"ExtensionName":".jpg","MimeType":"image/jpeg"},
+    {"ExtensionName":".png","MimeType":"image/png"},
+    {"ExtensionName":".svg","MimeType":"image/svg+xml"},
+    {"ExtensionName":".ico","MimeType":"image/x-icon"},
+    {"ExtensionName":".mp4","MimeType":"video/mp4"},
+    {"ExtensionName":".avi","MimeType":"video/x-msvideo"},
+    {"ExtensionName":".wav","MimeType":"audio/x-wav"},
+    {"ExtensionName":".mp3","MimeType":"audio/mpeg"},
+    {"ExtensionName":".ogg","MimeType":"audio/ogg"},
+    {"ExtensionName":".zip","MimeType":"application/zip"},
+    {"ExtensionName":".otf","MimeType":"application/x-font-otf"},
+    {"ExtensionName":".ttf","MimeType":"application/x-font-ttf"},
+    {"ExtensionName":".woff","MimeType":"application/font-woff"}
+]

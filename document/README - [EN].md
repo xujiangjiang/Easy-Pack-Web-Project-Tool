@@ -4,9 +4,7 @@ This is a very simple tool,
 
 This tool is used to package Web projects (Html files, Css files, Js files).
 
-（点击这里查看[中文文档](./document/README - [CN].md)）
-
-![image1](./document/asset/image1.png)
+![image1](asset/image1.png)
 
 <br/>
 
@@ -34,16 +32,6 @@ This tool has the following functions:
 
 <br/>
 
-## Download
-
-Click here to download：
-
-<br/>
-
-<br/>
-
-<br/>
-
 ## How to use?
 
 #### Step 1: Write the configuration file
@@ -52,7 +40,7 @@ First, we have to create a text file in .json format *(for example: MyConfig.jso
 
 Then, we have to set it like this in this configuration file:
 
-[（You can also click here to view a complete configuration file）](./document/asset/example.json)
+[（You can also click here to view a complete configuration file）](./asset/example.json)
 
 ```json
 {
@@ -117,7 +105,7 @@ First, open the configuration file we just wrote.
 
 Then, click the start packing button, and that's it!
 
-![image1](./document/asset/image2.png)
+![image1](asset/image2.png)
 
 
 

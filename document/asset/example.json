@@ -1,0 +1,32 @@
+{
+	"js":{
+        "filePaths":["./js/other/ui/otherUi.js",
+                    "./js/other/otherApp.js",
+                    "./js/timer/other/enums.js",
+                    "./js/timer/other/tools.js",
+                    "./js/timer/struct/time.js"],
+        "isDeleteCommentedOutCode":true,
+        "outputPath":"./dist/script.js"
+    },
+
+    "css":{
+        "filePaths":["./css/timer/other/font.css",
+                    "./css/timer/other/initial.css",
+                    "./css/other/style/main.css",
+                    "./css/other/style/logo.css",],
+        "isDeleteCommentedOutCode":true,
+        "outputPath":"./dist/style.css",
+        "isOutputOtherFile":true,
+        "otherFileOutputPath":"./img/",
+        "isOtherFileConvertBase64":true,
+        "base64ConvertLimit":10240
+    },
+    
+    "html":{
+        "filePath":"./index.html",
+        "isDeleteCommentedOutCode":true,
+        "outputPath":"./dist/index.html"
+    }
+}
+
+
