@@ -4,7 +4,7 @@ This is a very simple tool,
 
 This tool is used to package Web projects (Html files, Css files, Js files).
 
-点击这里查看[中文文档](./document/README - [CN].md)
+[点击这里查看中文文档](./document/README-CN.md)
 
 ![image1](./document/asset/image1.png)
 
