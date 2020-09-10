@@ -36,7 +36,7 @@ This tool has the following functions:
 
 ## Download
 
-Click here to download：
+Click here to download：https://github.com/xujiangjiang/Easy-Pack-Web-Project-Tool/releases/download/v1.0.0/EasyPackWebProjectTool.v1.0.0.zip
 
 <br/>
 
